@@ -1,0 +1,22 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	color: #008529;
+	font: monospace;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background-color: #030303;
+}
+
+#matrix {
+	height: 368px;
+	width: 368px;
+	border: 1px solid #008529;
+	background-color: #030303;
+}
