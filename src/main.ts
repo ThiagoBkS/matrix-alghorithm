@@ -6,26 +6,37 @@ matrix.start();
 document.getElementById("change-font")?.addEventListener("input", (event) => {
 	const target = event.target as HTMLSelectElement;
 
-	matrix.changeFont(target.value);
+	matrix.changeMatrixFont(target.value);
 });
 
-document.querySelectorAll("[data-color]").forEach((element) => {
-	if (!(element instanceof HTMLElement)) return;
-	const color = element.dataset.color;
+document.getElementById("change-color")?.addEventListener("input", (event) => {
+	const target = event.target as HTMLSelectElement;
 
-	element.addEventListener("click", () => matrix.changeColor(String(color)));
+	document.documentElement.style.setProperty("--main-color", target.value);
+	document.documentElement.style.setProperty("--secundary-color", target.value);
+	document.documentElement.style.setProperty("--secundary-hover-color", target.value + "60");
+	document.documentElement.style.setProperty("--secundary-active-color", target.value + "90");
+
+	matrix.changeMatrixColor(target.value);
 });
 
 document.getElementById("change-fps")?.addEventListener("input", (event) => {
 	const target = event.target as HTMLSelectElement;
 	const value = Number(target.value);
 
-	matrix.changeFPS(value);
+	matrix.changeMatrixFPS(value);
+});
+
+document.getElementById("change-size")?.addEventListener("input", (event) => {
+	const target = event.target as HTMLSelectElement;
+	const value = Number(target.value);
+
+	matrix.changeMatrixSize(value);
 });
 
 document.getElementById("change-quality")?.addEventListener("input", (event) => {
 	const target = event.target as HTMLSelectElement;
 	const value = Number(target.value);
 
-	matrix.changeQuality(value, value);
+	matrix.changeCanvaSize(value, value);
 });
