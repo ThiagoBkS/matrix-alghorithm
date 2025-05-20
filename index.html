@@ -1,57 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div id="main">
+			<canvas id="matrix" height="512" width="512"></canvas>
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Document</title>
-	<link rel="stylesheet" href="style.css" />
-</head>
+			<div class="controls">
+				<div class="control">
+					<span class="matrix-start-effect">Font:</span>
 
-<body>
-	<div id="main">
-		<canvas id="matrix" height="512" width="512"></canvas>
-
-		<div class="controls">
-			<div class="control">
-				<span class="matrix-start-effect">Font:</span>
-
-				<div class="select-container">
-					<select id="change-font">
-						<option style="font-family: serif;">serif</option>
-						<option style="font-family: sans-serif;">sans-serif</option>
-						<option style="font-family: monospace;" selected>monospace</option>
-						<option style="font-family: cursive;">cursive</option>
-						<option style="font-family: fantasy;">fantasy</option>
-						<option style="font-family: system-ui;">system-ui</option>
-					</select>
+					<div class="select-container">
+						<select id="change-font">
+							<option style="font-family: serif">serif</option>
+							<option style="font-family: sans-serif">sans-serif</option>
+							<option style="font-family: monospace" selected>monospace</option>
+							<option style="font-family: cursive">cursive</option>
+							<option style="font-family: fantasy">fantasy</option>
+							<option style="font-family: system-ui">system-ui</option>
+						</select>
+					</div>
 				</div>
-			</div>
 
-			<div class="control">
-				<span class="matrix-start-effect">Color:</span>
-				<div class="color-selector-block">
-					<input id="change-color" type="color" value="#00FF00">
+				<div class="control">
+					<span class="matrix-start-effect">Color:</span>
+					<div class="color-selector-block">
+						<input id="change-color" type="color" value="#00FF00" />
+					</div>
 				</div>
-			</div>
 
-			<div class="control">
-				<span class="matrix-start-effect">FPS:</span>
-				<input id="change-fps" type="range" min="0" max="60" value="24">
-			</div>
+				<div class="control">
+					<span class="matrix-start-effect">FPS:</span>
+					<input id="change-fps" type="range" min="0" max="60" value="24" />
+				</div>
 
-			<div class="control">
-				<span>Size:</span>
-				<input id="change-size" type="range" min="8" max="64" value="32">
-			</div>
+				<div class="control">
+					<span>Size:</span>
+					<input id="change-size" type="range" min="8" max="64" value="32" />
+				</div>
 
-			<div class="control">
-				<span class="matrix-start-effect">Quality:</span>
-				<input id="change-quality" type="range" min="8" max="1024" value="512">
+				<div class="control">
+					<span class="matrix-start-effect">Quality:</span>
+					<input id="change-quality" type="range" min="8" max="1024" value="512" />
+				</div>
 			</div>
 		</div>
-</body>
 
-<script type="module" src="./dist/main.js"></script>
-
+		<script type="module" src="./dist/main.js"></script>
+	</body>
 </html>

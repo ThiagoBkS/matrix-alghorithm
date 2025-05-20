@@ -4,14 +4,13 @@ export default class Matrix {
         this.canvas = canvas;
         this.context = canvas.getContext("2d");
         this.config = {
-            fps: 24,
-            columns: 32,
+            fps: 30,
             lastFrameTime: undefined,
-            rainProbability: 0.2,
+            columns: 32,
             style: {
                 color: "#00FF00",
                 fontName: "monospace",
-                background: "rgba(0, 0, 0, 0.05)",
+                backgroundColor: "rgba(0, 0, 0, 0.05)",
             },
         };
         this.unicodeAlphabets = [
@@ -26,8 +25,8 @@ export default class Matrix {
                 endCode: 0x04ff,
             },
         ];
-        this.alphabet = this.getAlphabet("latine");
         this.rainDrops = new Array(this.config.columns).fill(-1);
+        this.alphabet = this.getAlphabet("latin");
     }
     get fontSize() {
         return this.canvas.width / this.config.columns + 1;
@@ -35,19 +34,19 @@ export default class Matrix {
     changeMatrixFPS(fps) {
         this.config.fps = fps;
     }
-    changeMatrixFont(fontName) {
-        this.config.style.fontName = fontName;
+    changeMatrixSize(columns) {
+        this.config.columns = columns;
+        this.rainDrops = new Array(this.config.columns).fill(-1);
     }
     changeMatrixColor(color) {
         this.config.style.color = color;
     }
-    changeCanvaSize(height, width) {
+    changeMatrixFont(fontName) {
+        this.config.style.fontName = fontName;
+    }
+    changeMatrixQuality(height, width) {
         this.canvas.height = height;
         this.canvas.width = width;
-    }
-    changeMatrixSize(columns) {
-        this.config.columns = columns;
-        this.rainDrops = new Array(this.config.columns).fill(-1);
     }
     getRandomCharacter() {
         const randomIndex = Math.floor(Math.random() * this.alphabet.length);
@@ -61,16 +60,15 @@ export default class Matrix {
         return getAlphabetByUnicodeRange(startCode, endCode);
     }
     renderRains() {
-        this.context.fillStyle = this.config.style.background;
+        this.context.fillStyle = this.config.style.backgroundColor;
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
         for (let rainIndex = 0; rainIndex < this.rainDrops.length; rainIndex++) {
             const character = this.getRandomCharacter();
             this.context.fillStyle = this.config.style.color;
             this.context.font = `${this.fontSize}px ${this.config.style.fontName}`;
             this.context.fillText(character, rainIndex * this.fontSize - this.fontSize / 2, this.rainDrops[rainIndex] * this.fontSize);
-            if (this.rainDrops[rainIndex] * this.fontSize > this.canvas.height &&
-                Math.random() > 1 - this.config.rainProbability)
-                this.rainDrops[rainIndex] = 0;
+            if (this.rainDrops[rainIndex] * this.fontSize > this.canvas.height && Math.random() > 0.9)
+                this.rainDrops[rainIndex] = -1;
             this.rainDrops[rainIndex] += 1;
         }
     }

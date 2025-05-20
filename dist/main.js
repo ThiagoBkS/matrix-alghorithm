@@ -10,8 +10,8 @@ matrix.start();
     const target = event.target;
     document.documentElement.style.setProperty("--main-color", target.value);
     document.documentElement.style.setProperty("--secundary-color", target.value);
-    document.documentElement.style.setProperty("--secundary-hover-color", target.value + "60");
-    document.documentElement.style.setProperty("--secundary-active-color", target.value + "90");
+    document.documentElement.style.setProperty("--secundary-hover-color", target.value.concat("60"));
+    document.documentElement.style.setProperty("--secundary-active-color", target.value.concat("90"));
     matrix.changeMatrixColor(target.value);
 });
 (_c = document.getElementById("change-fps")) === null || _c === void 0 ? void 0 : _c.addEventListener("input", (event) => {
@@ -27,5 +27,5 @@ matrix.start();
 (_e = document.getElementById("change-quality")) === null || _e === void 0 ? void 0 : _e.addEventListener("input", (event) => {
     const target = event.target;
     const value = Number(target.value);
-    matrix.changeCanvaSize(value, value);
+    matrix.changeMatrixQuality(value, value);
 });

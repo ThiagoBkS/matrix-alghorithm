@@ -1,5 +1,5 @@
 export function getAlphabetByUnicodeRange(startCode: number, endCode: number): Array<string> {
-	const alphabet: Array<string> = [];
+	const alphabet = [];
 
 	for (let codePoint = startCode; codePoint <= endCode; codePoint++) {
 		const character = String.fromCharCode(codePoint);

@@ -4,33 +4,31 @@ export default class Matrix {
 	private canvas: HTMLCanvasElement;
 	private context: CanvasRenderingContext2D;
 	private config: {
-		lastFrameTime: number | undefined;
 		fps: number;
+		lastFrameTime: number | undefined;
 		columns: number;
-		rainProbability: number;
 		style: { [key: string]: string };
 	};
+	private rainDrops: Array<number>;
+	private alphabet: Array<string>;
 	private unicodeAlphabets: Array<{
 		name: string;
 		startCode: number;
 		endCode: number;
 	}>;
-	private alphabet: Array<string>;
-	private rainDrops: Array<number>;
 
 	constructor(canvas: HTMLCanvasElement) {
 		this.canvas = canvas;
 		this.context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
 		this.config = {
-			fps: 24,
-			columns: 32,
+			fps: 30,
 			lastFrameTime: undefined,
-			rainProbability: 0.2,
+			columns: 32,
 			style: {
 				color: "#00FF00",
 				fontName: "monospace",
-				background: "rgba(0, 0, 0, 0.05)",
+				backgroundColor: "rgba(0, 0, 0, 0.05)",
 			},
 		};
 
@@ -47,8 +45,8 @@ export default class Matrix {
 			},
 		];
 
-		this.alphabet = this.getAlphabet("latine");
 		this.rainDrops = new Array(this.config.columns).fill(-1);
+		this.alphabet = this.getAlphabet("latin");
 	}
 
 	get fontSize() {
@@ -59,22 +57,22 @@ export default class Matrix {
 		this.config.fps = fps;
 	}
 
-	public changeMatrixFont(fontName: string) {
-		this.config.style.fontName = fontName;
+	public changeMatrixSize(columns: number) {
+		this.config.columns = columns;
+		this.rainDrops = new Array(this.config.columns).fill(-1);
 	}
 
 	public changeMatrixColor(color: string) {
 		this.config.style.color = color;
 	}
 
-	public changeCanvaSize(height: number, width: number) {
-		this.canvas.height = height;
-		this.canvas.width = width;
+	public changeMatrixFont(fontName: string) {
+		this.config.style.fontName = fontName;
 	}
 
-	public changeMatrixSize(columns: number) {
-		this.config.columns = columns;
-		this.rainDrops = new Array(this.config.columns).fill(-1);
+	public changeMatrixQuality(height: number, width: number) {
+		this.canvas.height = height;
+		this.canvas.width = width;
 	}
 
 	private getRandomCharacter() {
@@ -94,7 +92,7 @@ export default class Matrix {
 	}
 
 	private renderRains() {
-		this.context.fillStyle = this.config.style.background;
+		this.context.fillStyle = this.config.style.backgroundColor;
 		this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
 		for (let rainIndex = 0; rainIndex < this.rainDrops.length; rainIndex++) {
@@ -102,18 +100,14 @@ export default class Matrix {
 
 			this.context.fillStyle = this.config.style.color;
 			this.context.font = `${this.fontSize}px ${this.config.style.fontName}`;
-
 			this.context.fillText(
 				character,
 				rainIndex * this.fontSize - this.fontSize / 2,
 				this.rainDrops[rainIndex] * this.fontSize
 			);
 
-			if (
-				this.rainDrops[rainIndex] * this.fontSize > this.canvas.height &&
-				Math.random() > 1 - this.config.rainProbability
-			)
-				this.rainDrops[rainIndex] = 0;
+			if (this.rainDrops[rainIndex] * this.fontSize > this.canvas.height && Math.random() > 0.9)
+				this.rainDrops[rainIndex] = -1;
 
 			this.rainDrops[rainIndex] += 1;
 		}

@@ -14,8 +14,8 @@ document.getElementById("change-color")?.addEventListener("input", (event) => {
 
 	document.documentElement.style.setProperty("--main-color", target.value);
 	document.documentElement.style.setProperty("--secundary-color", target.value);
-	document.documentElement.style.setProperty("--secundary-hover-color", target.value + "60");
-	document.documentElement.style.setProperty("--secundary-active-color", target.value + "90");
+	document.documentElement.style.setProperty("--secundary-hover-color", target.value.concat("60"));
+	document.documentElement.style.setProperty("--secundary-active-color", target.value.concat("90"));
 
 	matrix.changeMatrixColor(target.value);
 });
@@ -38,5 +38,5 @@ document.getElementById("change-quality")?.addEventListener("input", (event) => 
 	const target = event.target as HTMLSelectElement;
 	const value = Number(target.value);
 
-	matrix.changeCanvaSize(value, value);
+	matrix.changeMatrixQuality(value, value);
 });
