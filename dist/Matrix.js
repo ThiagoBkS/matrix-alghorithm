@@ -1,4 +1,4 @@
-import { getAlphabetByUnicodeRange } from "./functions.js";
+import { getAlphabetByName } from "./functions.js";
 export default class Matrix {
     constructor(canvas) {
         this.canvas = canvas;
@@ -6,27 +6,16 @@ export default class Matrix {
         this.config = {
             fps: 30,
             lastFrameTime: undefined,
-            columns: 32,
+            columns: this.canvas.width / 16,
             style: {
                 color: "#00FF00",
                 fontName: "monospace",
                 backgroundColor: "rgba(0, 0, 0, 0.05)",
+                alphabet: "latin",
             },
         };
-        this.unicodeAlphabets = [
-            {
-                name: "latin",
-                startCode: 0x0000,
-                endCode: 0x007f,
-            },
-            {
-                name: "cyrillic",
-                startCode: 0x0400,
-                endCode: 0x04ff,
-            },
-        ];
         this.rainDrops = new Array(this.config.columns).fill(-1);
-        this.alphabet = this.getAlphabet("latin");
+        this.alphabet = getAlphabetByName(this.config.style.alphabet);
     }
     get fontSize() {
         return this.canvas.width / this.config.columns + 1;
@@ -44,6 +33,9 @@ export default class Matrix {
     changeMatrixFont(fontName) {
         this.config.style.fontName = fontName;
     }
+    changeMatrixAlphabet(alphabetName) {
+        this.alphabet = getAlphabetByName(alphabetName);
+    }
     changeMatrixQuality(height, width) {
         this.canvas.height = height;
         this.canvas.width = width;
@@ -51,13 +43,6 @@ export default class Matrix {
     getRandomCharacter() {
         const randomIndex = Math.floor(Math.random() * this.alphabet.length);
         return this.alphabet[randomIndex];
-    }
-    getAlphabet(alphabetName) {
-        const { startCode, endCode } = this.unicodeAlphabets.find((alphabet) => alphabet.name === alphabetName) || {
-            startCode: 0x0000,
-            endCode: 0x007f,
-        };
-        return getAlphabetByUnicodeRange(startCode, endCode);
     }
     renderRains() {
         this.context.fillStyle = this.config.style.backgroundColor;

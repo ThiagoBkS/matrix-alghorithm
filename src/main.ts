@@ -1,3 +1,4 @@
+import { avaliableAlphabets } from "./functions.js";
 import Matrix from "./Matrix.js";
 
 const matrix = new Matrix(document.getElementById("matrix") as HTMLCanvasElement);
@@ -40,3 +41,29 @@ document.getElementById("change-quality")?.addEventListener("input", (event) => 
 
 	matrix.changeMatrixQuality(value, value);
 });
+
+const alphabetInput = document.getElementById("change-alphabet");
+
+avaliableAlphabets.forEach((alphabet) => {
+	const option = document.createElement("option");
+	option.value = alphabet.name;
+	option.textContent = alphabet.name;
+
+	alphabetInput?.append(option);
+});
+
+alphabetInput?.addEventListener("input", (event) => {
+	const target = event.target as HTMLSelectElement;
+	const value = target.value;
+
+	matrix.changeMatrixAlphabet(value);
+});
+
+// Background MATRIX
+const backgroundMatrix = new Matrix(
+	document.getElementById("background-matrix") as HTMLCanvasElement
+);
+
+backgroundMatrix.changeMatrixFPS(12);
+backgroundMatrix.changeMatrixAlphabet("Latin Num.");
+backgroundMatrix.start();

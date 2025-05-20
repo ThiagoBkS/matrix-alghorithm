@@ -7,6 +7,8 @@
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
+		<canvas id="background-matrix" width="512"></canvas>
+
 		<div id="main">
 			<canvas id="matrix" height="512" width="512"></canvas>
 
@@ -23,6 +25,14 @@
 							<option style="font-family: fantasy">fantasy</option>
 							<option style="font-family: system-ui">system-ui</option>
 						</select>
+					</div>
+				</div>
+
+				<div class="control">
+					<span class="matrix-start-effect">Alphabet:</span>
+
+					<div class="select-container">
+						<select id="change-alphabet"></select>
 					</div>
 				</div>
 

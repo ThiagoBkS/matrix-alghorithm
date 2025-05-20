@@ -18,7 +18,7 @@
 }
 
 body {
-	/* font-weight: 800; */
+	font-weight: 800;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -43,6 +43,16 @@ body {
 	background-color: #030303;
 }
 
+#background-matrix {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: -999;
+	opacity: 5%;
+}
+
 .controls {
 	width: 100%;
 	display: flex;
@@ -62,6 +72,7 @@ body {
 	width: 100%;
 	padding: 4px 48px;
 	font-family: monospace;
+	font-size: 1.1rem;
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -69,6 +80,7 @@ body {
 	border: none;
 	outline: none;
 	border: 1px dashed var(--secundary-color);
+	;
 }
 
 .select-container {
@@ -86,6 +98,10 @@ body {
 	transform: translateY(-50%);
 	pointer-events: none;
 
+}
+
+option {
+	font-family: "Monospace";
 }
 
 .color-selector-block {

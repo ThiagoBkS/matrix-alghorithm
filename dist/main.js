@@ -1,4 +1,5 @@
 var _a, _b, _c, _d, _e;
+import { avaliableAlphabets } from "./functions.js";
 import Matrix from "./Matrix.js";
 const matrix = new Matrix(document.getElementById("matrix"));
 matrix.start();
@@ -29,3 +30,20 @@ matrix.start();
     const value = Number(target.value);
     matrix.changeMatrixQuality(value, value);
 });
+const alphabetInput = document.getElementById("change-alphabet");
+avaliableAlphabets.forEach((alphabet) => {
+    const option = document.createElement("option");
+    option.value = alphabet.name;
+    option.textContent = alphabet.name;
+    alphabetInput === null || alphabetInput === void 0 ? void 0 : alphabetInput.append(option);
+});
+alphabetInput === null || alphabetInput === void 0 ? void 0 : alphabetInput.addEventListener("input", (event) => {
+    const target = event.target;
+    const value = target.value;
+    matrix.changeMatrixAlphabet(value);
+});
+// Background MATRIX
+const backgroundMatrix = new Matrix(document.getElementById("background-matrix"));
+backgroundMatrix.changeMatrixFPS(12);
+backgroundMatrix.changeMatrixAlphabet("Latin Num.");
+backgroundMatrix.start();
