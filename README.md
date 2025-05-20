@@ -2,7 +2,7 @@
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![TypeScript](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square)
 
-![Screenshoot](./images/preview.png)
+![Screenshoot](./images/preview.jpg)
 
 ## Rodando localmente
 
